@@ -4,68 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hound Express - Seguimiento de Paquetes</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/scss/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header class="header">
-        <div class="logo-container">
-            <img src="images/logo.png" alt="Logo Hound Express" class="logo">
+        <div class="header__logo-container">
+            <img src="images/logo.png" alt="Logo Hound Express" class="header__logo">
         </div>
-        <button class="hamburger-btn" aria-label="Menú">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
+        <button class="header__hamburger" aria-label="Menú">
+            <span class="header__hamburger-line"></span>
+            <span class="header__hamburger-line"></span>
+            <span class="header__hamburger-line"></span>
         </button>        
-        <nav class="nav-menu">
-            <ul>
-                <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
-                <li><a href="#registro"><i class="fas fa-plus-circle"></i> Registro de Guías</a></li>
-                <li><a href="#estado"><i class="fas fa-chart-bar"></i> Estado General</a></li>
-                <li><a href="#lista"><i class="fas fa-list"></i> Lista de Guías</a></li>
-                <li><a href="#buscar"><i class="fas fa-search"></i> Buscar Guías</a></li>
-                <li><a href="#historial"><i class="fas fa-history"></i> Historial de Guías</a></li>
+        <nav class="header__nav">
+            <ul class="header__nav-list">
+                <li><a class="header__nav-link" href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a class="header__nav-link" href="#registro"><i class="fas fa-plus-circle"></i> Registro de Guías</a></li>
+                <li><a class="header__nav-link" href="#estado"><i class="fas fa-chart-bar"></i> Estado General</a></li>
+                <li><a class="header__nav-link" href="#lista"><i class="fas fa-list"></i> Lista de Guías</a></li>
+                <li><a class="header__nav-link" href="#buscar"><i class="fas fa-search"></i> Buscar Guías</a></li>
+                <li><a class="header__nav-link" href="#historial"><i class="fas fa-history"></i> Historial de Guías</a></li>
             </ul>
         </nav>
-    </header>    
+    </header>
     <section class="banner" id="inicio">
-        <div class="banner-content">
-            <h2>Seguimiento de Paquetes en Tiempo Real</h2>
-            <p>Tu paquete, nuestra prioridad - siempre sabrás dónde está</p>
-            <img src="images/banner.png" alt="Entrega de paquetes" class="banner-img">
+        <div class="banner__content">
+            <h2 class="banner__title">Seguimiento de Paquetes en Tiempo Real</h2>
+            <p class="banner__text">Tu paquete, nuestra prioridad - siempre sabrás dónde está</p>
+            <img src="images/banner.png" alt="Entrega de paquetes" class="banner__image">
         </div>
     </section>
 
     <main class="main-content">
-        <section class="form-section" id="registro">
+        <section class="form__section" id="registro">
             <h2><i class="fas fa-edit"></i> Registro de Nueva Guía</h2>
-            <form class="package-form">
-                <div class="form-group">
+            <form class="form">
+                <div class="form__group">
                     <label for="guide-number">Número de Guía:</label>
                     <input type="text" id="guide-number" name="guide-number" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form__group">
                     <label for="origin">Origen:</label>
                     <input type="text" id="origin" name="origin" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form__group">
                     <label for="destination">Destino:</label>
                     <input type="text" id="destination" name="destination" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form__group">
                     <label for="recipient">Destinatario:</label>
                     <input type="text" id="recipient" name="recipient" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form__group">
                     <label for="creation-date">Fecha de Creación:</label>
                     <input type="date" id="creation-date" name="creation-date" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form__group">
                     <label for="status">Estado Inicial:</label>
                     <select id="status" required>
                         <option value="">Seleccione un estado</option>
@@ -75,41 +75,41 @@
                     </select>
                 </div>
                 
-                <button type="submit" class="submit-btn">Registrar Guía</button>
+                <button type="submit" class="form__submit">Registrar Guía</button>
             </form>
         </section>
 
-        <section class="status-panel" id="estado">
+        <section class="status__panel" id="estado">
             <h2><i class="fas fa-chart-pie"></i> Estado General del Sistema</h2>
-            <div class="status-cards">
-                <div class="status-card">
+            <div class="status__cards">
+                <div class="status__card">
                     <h3>Guías Activas</h3>
-                    <p class="count">125</p>
-                    <p class="description">Total en el sistema</p>
+                    <p class="status__card-count">125</p>
+                    <p class="status__card-description">Total en el sistema</p>
                 </div>
                 
-                <div class="status-card">
+                <div class="status__card">
                     <h3>En Tránsito</h3>
-                    <p class="count">78</p>
-                    <p class="description">En camino a destino</p>
+                    <p class="status__card-count">78</p>
+                    <p class="status__card-description">En camino a destino</p>
                 </div>
                 
-                <div class="status-card">
+                <div class="status__card">
                     <h3>Entregadas</h3>
-                    <p class="count">47</p>
-                    <p class="description">Este mes</p>
+                    <p class="status__card-count">47</p>
+                    <p class="status__card-description">Este mes</p>
                 </div>
             </div>
         </section>
 
-        <section class="guide-list" id="lista">
+        <section class="guide__list" id="lista">
             <h2><i class="fas fa-clipboard-list"></i> Lista de Guías Registradas</h2>
-            <div class="search-container">
-                <input type="text" placeholder="Buscar guía..." class="search-input">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
+            <div class="search__container">
+                <input type="text" placeholder="Buscar guía..." class="search__input">
+                <button class="search__btn"><i class="fas fa-search"></i></button>
             </div>
-            
-            <div class="table-container">
+
+            <div class="table__container">
                 <table>
                     <thead>
                         <tr>
@@ -124,53 +124,53 @@
                     <tbody>
                         <tr>
                             <td data-label="Número">HGX-2023-001</td>
-                            <td data-label="Estado"><span class="status-badge delivered">Entregado</span></td>
+                            <td data-label="Estado"><span class="status-badge status-badge--delivered">Entregado</span></td>
                             <td data-label="Origen">Bogotá</td>
                             <td data-label="Destino">Medellín</td>
                             <td data-label="Actualización">15/10/2023</td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn update"><i class="fas fa-sync-alt"></i></button>
-                                    <button class="action-btn history"><i class="fas fa-history"></i></button>
+                                    <button class="action-btn action-btn--update"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="action-btn action-btn--history"><i class="fas fa-history"></i></button>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td data-label="Número">HGX-2023-002</td>
-                            <td data-label="Estado"><span class="status-badge transit">En tránsito</span></td>
+                            <td data-label="Estado"><span class="status-badge status-badge--transit">En tránsito</span></td>
                             <td data-label="Origen">Cali</td>
                             <td data-label="Destino">Barranquilla</td>
                             <td data-label="Actualización">14/10/2023</td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn update"><i class="fas fa-sync-alt"></i></button>
-                                    <button class="action-btn history"><i class="fas fa-history"></i></button>
+                                    <button class="action-btn action-btn--update"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="action-btn action-btn--history"><i class="fas fa-history"></i></button>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td data-label="Número">HGX-2023-003</td>
-                            <td data-label="Estado"><span class="status-badge pending">Pendiente</span></td>
+                            <td data-label="Estado"><span class="status-badge status-badge--pending">Pendiente</span></td>
                             <td data-label="Origen">Cartagena</td>
                             <td data-label="Destino">Bucaramanga</td>
                             <td data-label="Actualización">13/10/2023</td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn update"><i class="fas fa-sync-alt"></i></button>
-                                    <button class="action-btn history"><i class="fas fa-history"></i></button>
+                                    <button class="action-btn action-btn--update"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="action-btn action-btn--history"><i class="fas fa-history"></i></button>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td data-label="Número">HGX-2023-004</td>
-                            <td data-label="Estado"><span class="status-badge transit">En tránsito</span></td>
+                            <td data-label="Estado"><span class="status-badge status-badge--transit">En tránsito</span></td>
                             <td data-label="Origen">Pereira</td>
                             <td data-label="Destino">Manizales</td>
                             <td data-label="Actualización">12/10/2023</td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="action-btn update"><i class="fas fa-sync-alt"></i></button>
-                                    <button class="action-btn history"><i class="fas fa-history"></i></button>
+                                    <button class="action-btn action-btn--update"><i class="fas fa-sync-alt"></i></button>
+                                    <button class="action-btn action-btn--history"><i class="fas fa-history"></i></button>
                                 </div>
                             </td>
                         </tr>

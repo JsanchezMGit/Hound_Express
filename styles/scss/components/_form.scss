@@ -1,0 +1,88 @@
+@import '../layout/section';
+
+.form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;    
+    &__section {
+        @extend .section;
+        & h2 {
+            @include respond-to('small') {
+                font-size: 1.3rem;
+            }
+            @include respond-to('xsmall') {
+                font-size: 1.4rem;
+                margin-bottom: 1.25rem;
+            }
+        }        
+        @include respond-to('xsmall') {
+            padding: 1.25rem;
+        }
+    }
+    &__group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        & label {
+            font-weight: 500;
+            color: $dark-color;
+            @include respond-to('small') {
+                font-size: 0.9rem;
+            }
+            @include respond-to('xsmall') {
+                font-size: 0.9rem;
+            }
+        }
+        & input,
+        & select {
+            padding: 0.75rem;
+            border: 1px solid $ligth-gray;
+            border-radius: $border-radius;
+            font-size: 1rem;
+            transition: $transition;
+            @include respond-to('small') {
+                width: 100%;                
+            }
+            @include respond-to('xsmall') {
+                padding: 0.65rem;
+                font-size: 0.95rem;
+            }
+        }
+        & input:focus,
+        & select:focus {
+            outline: none;
+            border-color: $secondary-color;
+            box-shadow: $dark-color;
+        }
+    }
+    &__submit {
+        grid-column: 1 / -1;
+        background-color: $secondary-color;
+        color: $white-color;
+        border: none;
+        padding: 1rem;
+        border-radius: $border-radius;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: $transition;
+        &:hover {
+            background-color: $info-color;
+        }
+        @include respond-to('xsmall') {
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+        }
+    }
+    @include respond-to('medium') {
+        grid-template-columns: 1fr;
+    }
+    @include respond-to('small') {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    @include respond-to('xsmall') {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }    
+}
