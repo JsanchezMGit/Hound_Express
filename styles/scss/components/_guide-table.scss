@@ -1,4 +1,5 @@
 @import '../layout/section';
+@import './badge';
 
 .guide__list {
     @extend .section;
@@ -122,28 +123,13 @@
         }
     }
 }
-
 .status-badge {
-    display: inline-block;
-    padding: 0.35rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: $white-color;
-    &--pending {
-        background-color: $warning-color;
-    }
-    &--transit {
-        background-color: $info-color;
-    }
-    &--delivered {
-        background-color: $success-color;
-    }
-    @include respond-to('xsmall') {   
+    @extend .badge;
+    @include respond-to('xsmall') {
         position: absolute;
         top: 0.75rem;
         right: 0.75rem;
-    }
+    }    
 }
 
 .action-btn {
@@ -160,6 +146,20 @@
     &--update {
         background-color: $info-color;
         color: $white-color;
+        &:disabled,
+        &[disabled] {
+            background-color: $gray-color !important;
+            cursor: not-allowed !important;
+            opacity: 0.7 !important;
+            transform: none !important;
+            &:hover {
+                opacity: 0.7 !important;
+                transform: none !important;
+            }
+            & i {
+                opacity: 0.5;
+            }
+        }
     }
     &--history {
         background-color: $primary-color;

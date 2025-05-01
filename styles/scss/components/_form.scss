@@ -86,3 +86,19 @@
         gap: 0.75rem;
     }    
 }
+
+input.valid {
+    border-color: $success-color;
+}
+
+label.valid {
+    color: $success-color;
+}
+
+input.invalid {
+    border-color: $accent-color;
+}
+
+label.invalid {
+    color: $accent-color;
+}
