@@ -6,7 +6,7 @@ interface GuideListProps {
   guides: IGuide[];
   onSearch: (term: string) => void;
   onUpdateStatus: (id: string) => void;
-  onShowHistory: (id: string) => void;
+  onShowHistory: (guide: IGuide) => void;
 }
 
 const GuideList = ({ guides, onSearch, onUpdateStatus, onShowHistory }: GuideListProps) => {
@@ -77,7 +77,7 @@ const GuideList = ({ guides, onSearch, onUpdateStatus, onShowHistory }: GuideLis
                       </button>
                       <button 
                         className="action-btn action-btn--history" 
-                        onClick={() => onShowHistory(guide.id)}
+                        onClick={() => onShowHistory(guide)}
                       >
                         <i className="fas fa-history"></i>
                       </button>
