@@ -1,0 +1,190 @@
+@import '../layout/section';
+@import './badge';
+
+.guide__list {
+    @extend .section;
+    @include respond-to('xsmall') {
+        padding: 1.25rem;
+        overflow: hidden;
+        & h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1.25rem;
+        }
+    }
+}
+
+.search {
+    &__container {
+        display: flex;
+        margin-bottom: 1.5rem;
+        max-width: 500px;
+        @include respond-to('xsmall') {
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+    }
+    &__input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: 1px solid $ligth-gray;
+        border-radius: $border-radius 0 0 $border-radius;
+        font-size: 1rem;
+        @include respond-to('xsmall') {
+            padding: 0.65rem;
+        }
+    }
+    &__btn {
+        background-color: $secondary-color;
+        color: $white-color;
+        border: none;
+        padding: 0 1.5rem;
+        border-radius: 0 $border-radius $border-radius 0;
+        cursor: pointer;
+        transition: $transition;
+        &:hover {
+            background-color: $info-color;
+        }        
+    }
+}
+
+.table__container {
+    overflow-x: auto;
+    & table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+    & th, td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid $ligth-gray;
+    }
+    & th {
+        background-color: $primary-color;
+        color: $white-color;
+        font-weight: 500;
+    }
+    & tr:hover {
+        background-color: $ligth-gray;
+    }
+    @include respond-to('large') {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        & table {
+            font-size: 0.9rem;
+        }
+        
+        & th, td {
+            padding: 0.75rem 0.5rem;
+            min-width: 100px;
+        }
+    }
+    @include respond-to('xsmall') {
+        & table, thead, tbody, th, td, tr {
+            display: block;
+            width: 100%;
+        }
+        
+        & thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        
+        & tbody tr {
+            border: 1px solid $light-color;
+            border-radius: $border-radius;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            position: relative;
+        }
+        
+        & td {
+            padding: 0.5rem 0.5rem 0.5rem 40%;
+            border: none;
+            position: relative;
+            min-height: 2.25rem;
+            &:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0.75rem;
+                top: 0.5rem;
+                width: 35%;
+                font-weight: 600;
+                color: $primary-color;
+                font-size: 0.85rem;
+                @include respond-to('xxsmall') {
+                    width: 40%;                    
+                }                
+            }
+            @include respond-to('xxsmall') {
+                padding-left: 45%;                
+            }            
+        }
+    }
+}
+.status-badge {
+    @extend .badge;
+    @include respond-to('xsmall') {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+    }    
+}
+
+.action-btn {
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: $transition;
+    margin-right: 0.5rem;
+    &--update {
+        background-color: $info-color;
+        color: $white-color;
+        &:disabled,
+        &[disabled] {
+            background-color: $gray-color !important;
+            cursor: not-allowed !important;
+            opacity: 0.7 !important;
+            transform: none !important;
+            &:hover {
+                opacity: 0.7 !important;
+                transform: none !important;
+            }
+            & i {
+                opacity: 0.5;
+            }
+        }
+    }
+    &--history {
+        background-color: $primary-color;
+        color: $white-color;
+    }
+    &:hover {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+    @include respond-to('large') {
+        width: 30px;
+        height: 30px;
+        margin-right: 0.3rem;
+    }
+    @include respond-to('xsmall') {
+        width: 28px;
+        height: 28px;
+        margin-left: 0.25rem;
+    }
+}
+
+.action-buttons {
+    @include respond-to('xsmall') {
+        position: absolute;
+        right: 0.75rem;
+        top: 0.75rem;
+    }
+}

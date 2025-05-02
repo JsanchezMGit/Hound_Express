@@ -1,0 +1,117 @@
+.form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  @media (max-width: 732px) {
+    .form__section h2 {
+      font-size: 1.3rem;
+    }
+  }
+  @media (max-width: 666px) {
+    .form__section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+  @media (max-width: 666px) {
+    .form__section {
+      padding: 1.25rem;
+    }
+  }
+  .form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .form__group label {
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  @media (max-width: 732px) {
+    .form__group label {
+      font-size: 0.9rem;
+    }
+  }
+  @media (max-width: 666px) {
+    .form__group label {
+      font-size: 0.9rem;
+    }
+  }
+  .form__group input, .form__group select {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  @media (max-width: 732px) {
+    .form__group input, .form__group select {
+      width: 100%;
+    }
+  }
+  @media (max-width: 666px) {
+    .form__group input, .form__group select {
+      padding: 0.65rem;
+      font-size: 0.95rem;
+    }
+  }
+  .form__group input:focus, .form__group select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: #2c3e50;
+  }
+  .form__submit {
+    grid-column: 1/-1;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .form__submit:hover {
+    background-color: #2980b9;
+  }
+  @media (max-width: 666px) {
+    .form__submit {
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .form {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 732px) {
+    .form {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+  @media (max-width: 666px) {
+    .form {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+  input.valid {
+    border-color: #27ae60;
+  }
+  
+  label.valid {
+    color: #27ae60;
+  }
+  
+  input.invalid {
+    border-color: #e74c3c;
+  }
+  
+  label.invalid {
+    color: #e74c3c;
+  }

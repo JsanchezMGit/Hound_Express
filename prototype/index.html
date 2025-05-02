@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hound Express - Seguimiento de Paquetes</title>
+    <link rel="stylesheet" href="styles/scss/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__logo-container">
+            <img src="images/logo.png" alt="Logo Hound Express" class="header__logo">
+        </div>
+        <button class="header__hamburger" aria-label="Menú">
+            <span class="header__hamburger-line"></span>
+            <span class="header__hamburger-line"></span>
+            <span class="header__hamburger-line"></span>
+        </button>        
+        <nav class="header__nav">
+            <ul class="header__nav-list">
+                <li><a class="header__nav-link" href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a class="header__nav-link" href="#registro"><i class="fas fa-plus-circle"></i> Registro de Guías</a></li>
+                <li><a class="header__nav-link" href="#estado"><i class="fas fa-chart-bar"></i> Estado General</a></li>
+                <li><a class="header__nav-link" href="#lista"><i class="fas fa-list"></i> Lista de Guías</a></li>
+                <li><a class="header__nav-link" href="#buscar"><i class="fas fa-search"></i> Buscar Guías</a></li>
+                <li><a class="header__nav-link" href="#historial"><i class="fas fa-history"></i> Historial de Guías</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="banner" id="inicio">
+        <div class="banner__content">
+            <h2 class="banner__title">Seguimiento de Paquetes en Tiempo Real</h2>
+            <p class="banner__text">Tu paquete, nuestra prioridad - siempre sabrás dónde está</p>
+            <img src="images/banner.png" alt="Entrega de paquetes" class="banner__image">
+        </div>
+    </section>
+
+    <main class="main-content">
+        <section class="form__section" id="registro">
+            <h2><i class="fas fa-edit"></i> Registro de Nueva Guía</h2>
+            <form class="form">
+                <div class="form__group">
+                    <label for="guide-number">Número de Guía:</label>
+                    <input type="text" id="guide-number" name="guide-number" required>
+                </div>
+                
+                <div class="form__group">
+                    <label for="origin">Origen:</label>
+                    <input type="text" id="origin" name="origin" required>
+                </div>
+                
+                <div class="form__group">
+                    <label for="destination">Destino:</label>
+                    <input type="text" id="destination" name="destination" required>
+                </div>
+                
+                <div class="form__group">
+                    <label for="recipient">Destinatario:</label>
+                    <input type="text" id="recipient" name="recipient" required>
+                </div>
+                
+                <div class="form__group">
+                    <label for="creation-date">Fecha de Creación:</label>
+                    <input type="date" id="creation-date" name="creation-date" required>
+                </div>
+                
+                <div class="form__group">
+                    <label for="status">Estado Inicial:</label>
+                    <select id="status" required>
+                        <option value="">Seleccione un estado</option>
+                        <option value="pending">Pendiente</option>
+                        <option value="transit">En tránsito</option>
+                        <option value="delivered">Entregado</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="form__submit">Registrar Guía</button>
+            </form>
+        </section>
+
+        <section class="status__panel" id="estado">
+            <h2><i class="fas fa-chart-pie"></i> Estado General del Sistema</h2>
+            <div class="status__cards">
+                <div class="status__card">
+                    <h3>Guías Activas</h3>
+                    <p class="status__card-count">0</p>
+                    <p class="status__card-description">Total en el sistema</p>
+                </div>
+
+                <div class="status__card">
+                    <h3>Pendientes</h3>
+                    <p class="status__card-count">0</p>
+                    <p class="status__card-description">En proceso</p>
+                </div>                
+
+                <div class="status__card">
+                    <h3>En Tránsito</h3>
+                    <p class="status__card-count">0</p>
+                    <p class="status__card-description">En camino a destino</p>
+                </div>
+                
+                <div class="status__card">
+                    <h3>Entregadas</h3>
+                    <p class="status__card-count">0</p>
+                    <p class="status__card-description">Este mes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide__list" id="lista">
+            <h2><i class="fas fa-clipboard-list"></i> Lista de Guías Registradas</h2>
+            <div class="search__container">
+                <input type="text" placeholder="Buscar guía..." class="search__input">
+                <button class="search__btn"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="table__container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Número de Guía</th>
+                            <th>Estado</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Última Actualización</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>Mi perro veloz</h3>
+                <p>Soluciones logísticas confiables y eficientes para tus necesidades de envío.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#registro">Registro de Guías</a></li>
+                    <li><a href="#estado">Estado General</a></li>
+                    <li><a href="#lista">Lista de Guías</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Calle Principal al final 123, CDMX</p>
+                <p><i class="fas fa-phone"></i> +52 0000000000</p>
+                <p><i class="fas fa-envelope"></i> contacto@miperroveloz.com</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Jesus Sanchez. Licensed for Non-Commercial Use Only. All rights reserved. | <a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+        </div>
+    </footer>    
+</body>
+<script src="scripts/main.js"></script>
+</html>

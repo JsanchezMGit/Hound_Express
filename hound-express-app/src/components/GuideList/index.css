@@ -1,0 +1,193 @@
+.table__container {
+    overflow-x: auto;
+  }
+  .table__container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  .table__container th, .table__container td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  .table__container th {
+    background-color: #2c3e50;
+    color: #fff;
+    font-weight: 500;
+  }
+  .table__container tr:hover {
+    background-color: #ddd;
+  }
+  @media (max-width: 1075px) {
+    .table__container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .table__container table {
+      font-size: 0.9rem;
+    }
+    .table__container th, .table__container td {
+      padding: 0.75rem 0.5rem;
+      min-width: 100px;
+    }
+  }
+  @media (max-width: 666px) {
+    .table__container table, .table__container thead, .table__container tbody, .table__container th, .table__container td, .table__container tr {
+      display: block;
+      width: 100%;
+    }
+    .table__container thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    .table__container tbody tr {
+      border: 1px solid #ecf0f1;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      position: relative;
+    }
+    .table__container td {
+      padding: 0.5rem 0.5rem 0.5rem 40%;
+      border: none;
+      position: relative;
+      min-height: 2.25rem;
+    }
+    .table__container td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0.75rem;
+      top: 0.5rem;
+      width: 35%;
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 0.85rem;
+    }
+  }
+  @media (max-width: 666px) and (max-width: 400px) {
+    .table__container td:before {
+      width: 40%;
+    }
+  }
+  @media (max-width: 666px) and (max-width: 400px) {
+    .table__container td {
+      padding-left: 45%;
+    }
+  }
+  
+  @media (max-width: 666px) {
+    .status-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  }
+  
+  .action-btn {
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 0.5rem;
+  }
+  .action-btn--update {
+    background-color: #2980b9;
+    color: #fff;
+  }
+  .action-btn--update:disabled, .action-btn--update[disabled] {
+    background-color: #666 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7 !important;
+    transform: none !important;
+  }
+  .action-btn--update:disabled:hover, .action-btn--update[disabled]:hover {
+    opacity: 0.7 !important;
+    transform: none !important;
+  }
+  .action-btn--update:disabled i, .action-btn--update[disabled] i {
+    opacity: 0.5;
+  }
+  .action-btn--history {
+    background-color: #2c3e50;
+    color: #fff;
+  }
+  .action-btn:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  @media (max-width: 1075px) {
+    .action-btn {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.3rem;
+    }
+  }
+  @media (max-width: 666px) {
+    .action-btn {
+      width: 28px;
+      height: 28px;
+      margin-left: 0.25rem;
+    }
+  }
+  
+  @media (max-width: 666px) {
+    .action-buttons {
+      position: absolute;
+      right: 0.75rem;
+      top: 0.75rem;
+    }
+  }
+
+  @media (max-width: 666px) {
+    .guide__list {
+      padding: 1.25rem;
+      overflow: hidden;
+    }
+    .guide__list h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .search__container {
+    display: flex;
+    margin-bottom: 1.5rem;
+    max-width: 500px;
+  }
+  @media (max-width: 666px) {
+    .search__container {
+      max-width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+  .search__input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    font-size: 1rem;
+  }
+  @media (max-width: 666px) {
+    .search__input {
+      padding: 0.65rem;
+    }
+  }
+  .search__btn {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .search__btn:hover {
+    background-color: #2980b9;
+  }
