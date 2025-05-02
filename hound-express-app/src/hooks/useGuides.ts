@@ -1,38 +1,50 @@
-import { useReducer } from 'react';
-import { guideReducer, initialState } from '../reducers/guideReducer';
-import { IGuide, statusLabels } from '../types';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../store/store';
+import { IGuide } from '../types';
+import { 
+  addGuide as addGuideAction, 
+  updateGuideStatus as updateGuideStatusAction,
+  setSearchTerm as setSearchTermAction,
+  setCurrentGuide,
+  showAlert as showAlertAction,
+  hideAlert as hideAlertAction,
+  showModal as showModalAction,
+  hideModal as hideModalAction
+} from '../store/guidesSlice';
+import { statusLabels } from '../types';
 
 export function useGuides() {
-  const [state, dispatch] = useReducer(guideReducer, initialState);
+  const state = useSelector((state: RootState) => state.guides);
+  const dispatch = useDispatch<AppDispatch>();
 
   const addGuide = (newGuide: IGuide) => {
-    dispatch({ type: 'ADD_GUIDE', payload: newGuide });
+    dispatch(addGuideAction(newGuide));
   };
 
   const updateGuideStatus = (guideId: string) => {
-    dispatch({ type: 'UPDATE_GUIDE_STATUS', payload: guideId });
+    dispatch(updateGuideStatusAction(guideId));
   };
 
   const setSearchTerm = (term: string) => {
-    dispatch({ type: 'SET_SEARCH_TERM', payload: term });
+    dispatch(setSearchTermAction(term));
   };
 
   const showGuideHistory = (guide: IGuide) => {
-    dispatch({ type: 'SET_CURRENT_GUIDE', payload: guide });
-    dispatch({ type: 'SHOW_MODAL', payload: `Historial de la guía ${guide.number}` });
+    dispatch(setCurrentGuide(guide));
+    dispatch(showModalAction(`Historial de la guía ${guide.number}`));
   };
 
   const hideModal = () => {
-    dispatch({ type: 'HIDE_MODAL' });
-    dispatch({ type: 'SET_CURRENT_GUIDE', payload: null });
+    dispatch(hideModalAction());
+    dispatch(setCurrentGuide(null));
   };
 
   const showAlert = (message: string, type: 'success' | 'error') => {
-    dispatch({ type: 'SHOW_ALERT', payload: { message, type } });
+    dispatch(showAlertAction({ message, type }));
   };
 
   const hideAlert = () => {
-    dispatch({ type: 'HIDE_ALERT' });
+    dispatch(hideAlertAction());
   };
 
   // Filtrar guías basado en el término de búsqueda
