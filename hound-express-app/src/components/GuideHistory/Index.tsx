@@ -31,7 +31,7 @@ const GuideHistory = ({ guide }: GuideHistoryProps) => {
                           {statusLabels[entry.status]}
                         </span>
                       </td>
-                      <td data-label="Fecha">{formatDate(entry.date)}</td>
+                      <td data-label="Fecha">{formatDate(`${entry.date}T${entry.time}`)}</td>
                       <td data-label="Hora">{entry.time}</td>
                     </tr>
                   ))}

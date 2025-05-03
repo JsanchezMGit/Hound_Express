@@ -34,7 +34,7 @@ const GuideList = ({ guides, onSearch, onUpdateStatus, onShowHistory }: GuideLis
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <button className="search__btn"><i className="fas fa-search"></i></button>
+        <button aria-label="Buscar guia" className="search__btn"><i className="fas fa-search"></i></button>
       </div>
 
       <div className="table__container">
@@ -72,12 +72,14 @@ const GuideList = ({ guides, onSearch, onUpdateStatus, onShowHistory }: GuideLis
                         disabled={guide.status === 'delivered'}
                         className="action-btn action-btn--update" 
                         onClick={() => onUpdateStatus(guide.id)}
+                        aria-label="Actualizar estatus"
                       >
                         <i className="fas fa-sync-alt"></i>
                       </button>
                       <button 
                         className="action-btn action-btn--history" 
                         onClick={() => onShowHistory(guide)}
+                        aria-label="Ver historial"
                       >
                         <i className="fas fa-history"></i>
                       </button>

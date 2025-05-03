@@ -44,7 +44,7 @@
     border-radius: 5px;
     font-size: 1rem;
     transition: all 0.3s ease;
-  }
+  }  
   @media (max-width: 732px) {
     .form__group input, .form__group select {
       width: 100%;

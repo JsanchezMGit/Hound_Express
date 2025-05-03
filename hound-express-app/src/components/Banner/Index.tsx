@@ -3,7 +3,7 @@ import './index.css';
 
 const Banner = () => {
   return (
-    <section className="banner" id="inicio">
+    <section className="banner" id="inicio" data-testid="banner-section">
       <div className="banner__content">
         <h2 className="banner__title">Seguimiento de Paquetes en Tiempo Real</h2>
         <p className="banner__text">Tu paquete, nuestra prioridad - siempre sabrás dónde está</p>

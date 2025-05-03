@@ -18,7 +18,8 @@ const Header = () => {
       <button 
         className={`header__hamburger ${menuActive ? 'header__nav--active' : ''}`} 
         onClick={toggleMenu}
-        aria-label="Menú"
+        aria-label="Menu de navegacion"
+        data-testid="hamburger-button"
       >
         <span className="header__hamburger-line"></span>
         <span className="header__hamburger-line"></span>
