@@ -12,8 +12,8 @@ const StatusPanel = ({ guides }: StatusPanelProps) => {
   const deliveredCount = guides.filter(g => g.status === 'delivered').length;
 
   return (
-    <section className="status__panel" id="estado" aria-label="Panel de estado del sistema">
-      <h2><i className="fas fa-chart-pie"></i> Estado General del Sistema</h2>
+    <section className="status__panel" id="estado" aria-label="Panel de estado del sistema" aria-labelledby="estatus-title">
+      <h2 id="estatus-title"><i className="fas fa-chart-pie"></i> Estado General del Sistema</h2>
       <div className="status__cards">
         <div className="status__card" data-testid="status-card">
           <h3>Guías Activas</h3>

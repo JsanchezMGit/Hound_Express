@@ -24,8 +24,8 @@ const GuideList = ({ guides, onSearch, onUpdateStatus, onShowHistory }: GuideLis
   };
 
   return (
-    <section className="guide__list" id="lista">
-      <h2><i className="fas fa-clipboard-list"></i> Lista de Guías Registradas</h2>
+    <section className="guide__list" id="lista" aria-labelledby="guides-title">
+      <h2 id="guides-title"><i className="fas fa-clipboard-list"></i> Lista de Guías Registradas</h2>
       <div className="search__container">
         <input 
           type="text" 

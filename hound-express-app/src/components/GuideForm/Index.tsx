@@ -96,9 +96,9 @@ const GuideForm = ({ guides, addGuide, setAlert }: GuideFormProps) => {
   };
 
   return (
-    <section className="form__section" id="registro">
-      <h2><i className="fas fa-edit"></i> Registro de Nueva Guía</h2>
-      <form className="form" onSubmit={handleSubmit}>
+    <section className="form__section" id="registro" aria-labelledby="register-title">
+      <h2 id="register-title"><i className="fas fa-edit"></i> Registro de Nueva Guía</h2>
+      <form id="guide-form" className="form" onSubmit={handleSubmit}>
         <div className="form__group">
           <label htmlFor="guide-number" className={errors.number ? 'invalid' : ''}>Número de Guía:</label>
           <input 
@@ -181,7 +181,7 @@ const GuideForm = ({ guides, addGuide, setAlert }: GuideFormProps) => {
           </select>
         </div>
         
-        <button type="submit" className="form__submit">Registrar Guía</button>
+        <button type="submit" className="form__submit" aria-label="Registrar guia" aria-controls="guide-form">Registrar Guía</button>
       </form>
     </section>
   );

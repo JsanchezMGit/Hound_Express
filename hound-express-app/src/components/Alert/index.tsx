@@ -20,7 +20,7 @@ const Alert = ({ message, type, onClose, duration = 3000 }: AlertProps) => {
   }, [duration, onClose]);
 
   return (
-    <div className={`alert alert--${type}`}>
+    <div className={`alert alert--${type}`} aria-hidden="true" role="alert">
       {message}
     </div>
   );

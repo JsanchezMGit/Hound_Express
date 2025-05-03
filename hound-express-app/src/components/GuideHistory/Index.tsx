@@ -9,12 +9,12 @@ interface GuideHistoryProps {
 const GuideHistory = ({ guide }: GuideHistoryProps) => {
     return(
         guide && (
-            <>
+            <section aria-labelledby="history-title">
               <p><strong>Origen:</strong> {guide.origin}</p>
               <p><strong>Destino:</strong> {guide.destination}</p>
               <p><strong>Destinatario:</strong> {guide.recipient}</p>
               
-              <h3>Registro de cambios:</h3>
+              <h3 id="history-title">Registro de cambios:</h3>
               <table className="history-table">
                 <thead>
                   <tr>
@@ -37,8 +37,8 @@ const GuideHistory = ({ guide }: GuideHistoryProps) => {
                   ))}
                 </tbody>
               </table>
-            </>
-          )        
+            </section>
+          )
     )
 };
 
