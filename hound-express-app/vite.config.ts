@@ -11,5 +11,6 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     css: true,
+    uiBase: "https://jsanchezmgit.github.io/Hound_Express/",
   }
 })
