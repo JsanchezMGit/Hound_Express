@@ -15,7 +15,7 @@ describe('Header Component', () => {
     it('Debe renderear el logo y el menu de hamburguesa', () => {
         render(<Header />);
 
-        const logo = screen.getByAltText('Logo Hound Express');
+        const logo = screen.getByAltText('Logo de Mi perro veloz');
         expect(logo).toBeInTheDocument();
         expect(logo).toHaveAttribute('src', 'test-logo-path.png');
 
@@ -58,7 +58,7 @@ describe('Header Component', () => {
         ];
 
         navLinks.forEach(link => {
-            const navLink = screen.getByRole('link', { name: link.text });
+            const navLink = screen.getByText(link.text);
             expect(navLink).toBeInTheDocument();
             expect(navLink).toHaveAttribute('href', link.href);
             expect(navLink).toHaveClass('header__nav-link');

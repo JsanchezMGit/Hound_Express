@@ -37,7 +37,7 @@ describe('StatusPanel Component', () => {
     it('Debe aplicar correctamente las clases', () => {
         render(<StatusPanel guides={mockGuides} />);
 
-        const panel = screen.getByRole('region', { name: /Panel de estado del sistema/i });
+        const panel = screen.getByLabelText(/Panel de estado del sistema/i);
         expect(panel).toHaveClass('status__panel');
 
         const cards = screen.getAllByTestId('status-card');

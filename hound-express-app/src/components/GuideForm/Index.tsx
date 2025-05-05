@@ -181,7 +181,7 @@ const GuideForm = ({ guides, addGuide, setAlert }: GuideFormProps) => {
           </select>
         </div>
         
-        <button type="submit" className="form__submit" aria-label="Registrar guia" aria-controls="guide-form">Registrar Guía</button>
+        <button type="submit" className="form__submit" aria-label="Registrar guia" aria-controls="guide-form" role="button">Registrar Guía</button>
       </form>
     </section>
   );

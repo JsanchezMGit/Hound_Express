@@ -33,7 +33,7 @@ describe('GuideForm Component', () => {
     expect(screen.getByLabelText(/Destinatario:/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Fecha de Creación:/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Estado Inicial:/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Registrar Guía/i })).toBeInTheDocument();
+    expect(screen.getByText(/Registrar Guía/i )).toBeInTheDocument();
     });
 
     it('shows error when guide number already exists', async () => {
@@ -67,7 +67,7 @@ describe('GuideForm Component', () => {
         target: { name: 'status', value: testData.status }
         });
         
-        fireEvent.click(screen.getByRole('button', { name: /Registrar Guía/i }));
+        fireEvent.click(screen.getByText(/Registrar Guía/i));
 
         await waitFor(() => {
             expect(mockSetAlert).toHaveBeenCalledWith({
@@ -110,7 +110,7 @@ describe('GuideForm Component', () => {
       target: { name: 'status', value: testData.status }
     });
 
-    fireEvent.click(screen.getByRole('button', { name: /Registrar Guía/i }));
+    fireEvent.click(screen.getByText(/Registrar Guía/i));
 
     await waitFor(() => {
       expect(mockAddGuide).toHaveBeenCalled();

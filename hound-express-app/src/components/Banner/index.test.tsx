@@ -17,7 +17,7 @@ describe('Banner Component', () => {
     expect(textElement).toHaveClass('banner__text');
     
     // Verificar que la imagen se renderiza correctamente
-    const imageElement = screen.getByAltText('Entrega de paquetes');
+    const imageElement = screen.getByAltText('Capcidad logistica de Mi perro veloz, con diversos vehiculos como barcos, aviones, tailers y contenedores');
     expect(imageElement).toBeInTheDocument();
     expect(imageElement).toHaveClass('banner__image');
     expect(imageElement).toHaveAttribute('src');
