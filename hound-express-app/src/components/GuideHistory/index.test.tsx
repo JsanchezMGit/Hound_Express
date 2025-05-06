@@ -4,18 +4,18 @@ import { describe, it, expect } from 'vitest';
 import { IGuide } from '../../types';
 
 const mockGuide: IGuide = {
-    id: 'HGX-2025-001',
-    number: 'HGX-2025-001',
+    id: 1,
+    trackingNumber: 'HGX-2025-001',
     origin: 'CDMX',
     destination: 'Monterrey',
     recipient: 'Juan Pérez',
     creationDate: '2025-01-01',
-    status: 'delivered',
-    lastUpdate: '2025-01-05',
+    currentStatus: 'delivered',
+    updatedAt: '2025-01-05',
     history: [
-        { status: 'pending', date: '2025-01-01', time: '10:00' },
-        { status: 'transit', date: '2025-01-03', time: '14:30' },
-        { status: 'delivered', date: '2025-01-05', time: '09:15' }
+        { status: 'pending', timestamp: '2025-01-01T10:00:00'},
+        { status: 'transit', timestamp: '2025-01-03T14:30:00'},
+        { status: 'delivered', timestamp: '2025-01-05T09:15:00'}
     ]
 };
 
@@ -47,16 +47,16 @@ describe('GuideHistory Component', () => {
         const rows = screen.getAllByRole('row');
         expect(rows).toHaveLength(4);
         expect(screen.getByText(/Pendiente/i)).toBeInTheDocument();
-        expect(screen.getByText('01/01/2025')).toBeInTheDocument();
-        expect(screen.getByText('10:00')).toBeInTheDocument();
+        expect(screen.getByText('2025-01-01')).toBeInTheDocument();
+        expect(screen.getByText('10:00:00')).toBeInTheDocument();
 
         expect(screen.getByText(/En tránsito/i)).toBeInTheDocument();
-        expect(screen.getByText('03/01/2025')).toBeInTheDocument();
-        expect(screen.getByText('14:30')).toBeInTheDocument();        
+        expect(screen.getByText('2025-01-03')).toBeInTheDocument();
+        expect(screen.getByText('14:30:00')).toBeInTheDocument();        
 
         expect(screen.getByText(/Entregado/i)).toBeInTheDocument();
-        expect(screen.getByText('05/01/2025')).toBeInTheDocument();
-        expect(screen.getByText('09:15')).toBeInTheDocument();
+        expect(screen.getByText('2025-01-05')).toBeInTheDocument();
+        expect(screen.getByText('09:15:00')).toBeInTheDocument();
     });
 
     it('Debe aplicar las clases correspondientes a cada estatus', () => {

@@ -1,18 +1,17 @@
 export interface IHistoryEntry {
   status: 'pending' | 'transit' | 'delivered';
-  date: string;
-  time: string;
+  timestamp: string;
 }
 
 export interface IGuide {
-  id: string;
-  number: string;
+  id: number;
+  trackingNumber: string;
   origin: string;
   destination: string;
   recipient: string;
   creationDate: string;
-  status: 'pending' | 'transit' | 'delivered';
-  lastUpdate: string;
+  currentStatus: 'pending' | 'transit' | 'delivered';
+  updatedAt: string;
   history: IHistoryEntry[];
 }
 
@@ -51,14 +50,17 @@ export interface IAppState {
     show: boolean;
     title: string;
   };
+  status: string;
+  error: string | null;
 }
 
-export type GuideAction =
-  | { type: 'ADD_GUIDE'; payload: IGuide }
-  | { type: 'UPDATE_GUIDE_STATUS'; payload: string }
-  | { type: 'SET_SEARCH_TERM'; payload: string }
-  | { type: 'SET_CURRENT_GUIDE'; payload: IGuide | null }
-  | { type: 'SHOW_ALERT'; payload: { message: string; type: 'success' | 'error' } }
-  | { type: 'HIDE_ALERT' }
-  | { type: 'SHOW_MODAL'; payload: string }
-  | { type: 'HIDE_MODAL' };
+export const IDLE = "idle";
+export const LOADING = "loading";
+export const SUCCEEDED = "succeeded";
+export const FAILED = "failed";
+
+export const FETCH_GUIDES = "guides";
+export const FETCH_GUIDE = "guides/get";
+export const CREATE_GUIDE = "guides/post";
+export const UPDATE_GUIDE = "guide/put";
+export const DELETE_GUIDE = "guide/delete";

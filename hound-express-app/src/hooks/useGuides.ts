@@ -3,13 +3,14 @@ import { RootState, AppDispatch } from '../store/store';
 import { IGuide } from '../types';
 import { 
   addGuide as addGuideAction, 
-  updateGuideStatus as updateGuideStatusAction,
+  updateGuide as updateGuideAction,
   setSearchTerm as setSearchTermAction,
   setCurrentGuide,
   showAlert as showAlertAction,
   hideAlert as hideAlertAction,
   showModal as showModalAction,
-  hideModal as hideModalAction
+  hideModal as hideModalAction,
+  fectchGuides as fectchGuidesAction
 } from '../store/guidesSlice';
 import { statusLabels } from '../types';
 
@@ -17,12 +18,16 @@ export function useGuides() {
   const state = useSelector((state: RootState) => state.guides);
   const dispatch = useDispatch<AppDispatch>();
 
+  const fetchGuides = () => {
+    dispatch(fectchGuidesAction());
+  }
+
   const addGuide = (newGuide: IGuide) => {
     dispatch(addGuideAction(newGuide));
   };
 
-  const updateGuideStatus = (guideId: string) => {
-    dispatch(updateGuideStatusAction(guideId));
+  const updateGuideStatus = (guide: IGuide) => {
+    dispatch(updateGuideAction(guide));
   };
 
   const setSearchTerm = (term: string) => {
@@ -31,7 +36,7 @@ export function useGuides() {
 
   const showGuideHistory = (guide: IGuide) => {
     dispatch(setCurrentGuide(guide));
-    dispatch(showModalAction(`Historial de la guía ${guide.number}`));
+    dispatch(showModalAction(`Historial de la guía ${guide.trackingNumber}`));
   };
 
   const hideModal = () => {
@@ -50,16 +55,17 @@ export function useGuides() {
   // Filtrar guías basado en el término de búsqueda
   const filteredGuides = state.guides.filter(guide => 
     state.searchTerm === '' ||
-    guide.number.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
+    guide.trackingNumber.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
     guide.origin.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
     guide.destination.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
     guide.recipient.toLowerCase().includes(state.searchTerm.toLowerCase()) ||
-    statusLabels[guide.status].toLowerCase().includes(state.searchTerm.toLowerCase())
+    statusLabels[guide.currentStatus].toLowerCase().includes(state.searchTerm.toLowerCase())
   );
 
   return {
     state,
     filteredGuides,
+    fetchGuides,
     addGuide,
     updateGuideStatus,
     setSearchTerm,

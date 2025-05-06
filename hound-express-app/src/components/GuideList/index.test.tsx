@@ -5,29 +5,29 @@ import { IGuide } from '../../types';
 
 const mockGuides: IGuide[] = [
     {
-        id: '1',
-        number: 'ABC123',
+        id: 1,
+        trackingNumber: 'ABC123',
         origin: 'CDMX',
         destination: 'Monterrey',
         recipient: 'Juan Pérez',
         creationDate: '2023-01-01',
-        status: 'pending',
-        lastUpdate: '2023-01-01',
-        history: [{ status: 'pending', date: '2023-01-01', time: '10:00' }]
+        currentStatus: 'pending',
+        updatedAt: '2023-01-01',
+        history: [{ status: 'pending', timestamp: '2023-01-01T10:00:00'}]
     },
     {
-        id: '2',
-        number: 'XYZ789',
+        id: 2,
+        trackingNumber: 'XYZ789',
         origin: 'Guadalajara',
         destination: 'Tijuana',
         recipient: 'María García',
         creationDate: '2023-01-02',
-        status: 'delivered',
-        lastUpdate: '2023-01-05',
+        currentStatus: 'delivered',
+        updatedAt: '2023-01-05',
         history: [
-            { status: 'pending', date: '2023-01-02', time: '12:00' },
-            { status: 'transit', date: '2023-01-04', time: '14:30' },
-            { status: 'delivered', date: '2023-01-05', time: '09:15' }
+            { status: 'pending', timestamp: '2023-01-02T12:00:00' },
+            { status: 'transit', timestamp: '2023-01-04T14:30:00' },
+            { status: 'delivered', timestamp: '2023-01-05T09:15:00' }
         ]
     }
 ];
@@ -46,7 +46,7 @@ describe('GuideList Component', () => {
         <GuideList 
             guides={mockGuides} 
             onSearch={mockOnSearch}
-            onUpdateStatus={mockOnUpdateStatus}
+            onUpdate={mockOnUpdateStatus}
             onShowHistory={mockOnShowHistory}
         />
         );
@@ -61,7 +61,7 @@ describe('GuideList Component', () => {
             <GuideList 
             guides={mockGuides} 
             onSearch={mockOnSearch}
-            onUpdateStatus={mockOnUpdateStatus}
+            onUpdate={mockOnUpdateStatus}
             onShowHistory={mockOnShowHistory}
             />
     );
@@ -85,7 +85,7 @@ describe('GuideList Component', () => {
             <GuideList 
             guides={[]} 
             onSearch={mockOnSearch}
-            onUpdateStatus={mockOnUpdateStatus}
+            onUpdate={mockOnUpdateStatus}
             onShowHistory={mockOnShowHistory}
             />
         );
@@ -99,7 +99,7 @@ describe('GuideList Component', () => {
             <GuideList 
             guides={mockGuides} 
             onSearch={mockOnSearch}
-            onUpdateStatus={mockOnUpdateStatus}
+            onUpdate={mockOnUpdateStatus}
             onShowHistory={mockOnShowHistory}
             />
         );
@@ -115,7 +115,7 @@ describe('GuideList Component', () => {
             <GuideList 
             guides={mockGuides} 
             onSearch={mockOnSearch}
-            onUpdateStatus={mockOnUpdateStatus}
+            onUpdate={mockOnUpdateStatus}
             onShowHistory={mockOnShowHistory}
             />
         );
@@ -131,15 +131,16 @@ describe('GuideList Component', () => {
             <GuideList 
             guides={mockGuides} 
             onSearch={mockOnSearch}
-            onUpdateStatus={mockOnUpdateStatus}
+            onUpdate={mockOnUpdateStatus}
             onShowHistory={mockOnShowHistory}
             />
         );
 
         const updateButtons = screen.getAllByRole('button', { name: /Actualizar estatus/i });
         fireEvent.click(updateButtons[0]);
-
-        expect(mockOnUpdateStatus).toHaveBeenCalledWith('1');
+        const guideToUpdate = {...mockGuides[0]};
+        guideToUpdate.currentStatus = 'transit';
+        expect(mockOnUpdateStatus).toHaveBeenCalledWith(guideToUpdate);
     });
 
     it('Debe llamar al metodo onShowHistory cuando se hace clic en el buton de historial', () => {
@@ -147,7 +148,7 @@ describe('GuideList Component', () => {
             <GuideList 
             guides={mockGuides} 
             onSearch={mockOnSearch}
-            onUpdateStatus={mockOnUpdateStatus}
+            onUpdate={mockOnUpdateStatus}
             onShowHistory={mockOnShowHistory}
             />
         );
@@ -163,7 +164,7 @@ describe('GuideList Component', () => {
             <GuideList 
             guides={mockGuides} 
             onSearch={mockOnSearch}
-            onUpdateStatus={mockOnUpdateStatus}
+            onUpdate={mockOnUpdateStatus}
             onShowHistory={mockOnShowHistory}
             />
         );

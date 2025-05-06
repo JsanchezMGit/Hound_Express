@@ -31,8 +31,6 @@ describe('GuideForm Component', () => {
     expect(screen.getByLabelText(/Origen:/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Destino:/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Destinatario:/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Fecha de Creación:/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Estado Inicial:/i)).toBeInTheDocument();
     expect(screen.getByText(/Registrar Guía/i )).toBeInTheDocument();
     });
 
@@ -40,16 +38,14 @@ describe('GuideForm Component', () => {
         renderGuideForm();
 
         const testData = {
-            number: 'HGX-2023-001',
-            origin: 'Guadalajara',
-            destination: 'Tijuana',
-            recipient: 'María García',
-            creationDate: '2023-01-02',
-            status: 'pending'
+          trackingNumber: 'HGX-2023-001',
+          origin: 'Guadalajara',
+          destination: 'Tijuana',
+          recipient: 'María García'
         };
 
         fireEvent.change(screen.getByLabelText(/Número de Guía:/i), {
-        target: { name: 'number', value: testData.number }
+        target: { name: 'trackingNumber', value: testData.trackingNumber }
         });
         fireEvent.change(screen.getByLabelText(/Origen:/i), {
         target: { name: 'origin', value: testData.origin }
@@ -59,12 +55,6 @@ describe('GuideForm Component', () => {
         });
         fireEvent.change(screen.getByLabelText(/Destinatario:/i), {
         target: { name: 'recipient', value: testData.recipient }
-        });
-        fireEvent.change(screen.getByLabelText(/Fecha de Creación:/i), {
-        target: { name: 'creationDate', value: testData.creationDate }
-        });
-        fireEvent.change(screen.getByLabelText(/Estado Inicial:/i), {
-        target: { name: 'status', value: testData.status }
         });
         
         fireEvent.click(screen.getByText(/Registrar Guía/i));
@@ -83,16 +73,14 @@ describe('GuideForm Component', () => {
     renderGuideForm();
 
     const testData = {
-      number: 'HGX-2025-001',
+      trackingNumber: 'HGX-2025-001',
       origin: 'Guadalajara',
       destination: 'Tijuana',
-      recipient: 'María García',
-      creationDate: '2023-01-02',
-      status: 'pending'
+      recipient: 'María García'
     };
 
     fireEvent.change(screen.getByLabelText(/Número de Guía:/i), {
-      target: { name: 'number', value: testData.number }
+      target: { name: 'trackingNumber', value: testData.trackingNumber }
     });
     fireEvent.change(screen.getByLabelText(/Origen:/i), {
       target: { name: 'origin', value: testData.origin }
@@ -103,23 +91,11 @@ describe('GuideForm Component', () => {
     fireEvent.change(screen.getByLabelText(/Destinatario:/i), {
       target: { name: 'recipient', value: testData.recipient }
     });
-    fireEvent.change(screen.getByLabelText(/Fecha de Creación:/i), {
-      target: { name: 'creationDate', value: testData.creationDate }
-    });
-    fireEvent.change(screen.getByLabelText(/Estado Inicial:/i), {
-      target: { name: 'status', value: testData.status }
-    });
 
     fireEvent.click(screen.getByText(/Registrar Guía/i));
 
     await waitFor(() => {
-      expect(mockAddGuide).toHaveBeenCalled();
-      expect(mockSetAlert).toHaveBeenCalledWith({
-        show: true,
-        message: `Guía ${testData.number} registrada exitosamente`,
-        type: 'success'
-      });
-      
+      expect(mockAddGuide).toHaveBeenCalled();      
       expect(screen.getByLabelText(/Número de Guía:/i)).toHaveValue('');
     });
   });

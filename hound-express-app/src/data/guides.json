@@ -1,89 +1,81 @@
 [
     {
-       "id":"HGX-2023-001",
-       "number":"HGX-2023-001",
+       "id":1,
+       "trackingNumber":"HGX-2023-001",
        "origin":"Bogotá",
        "destination":"Medellín",
        "recipient":"Cliente Ejemplo 1",
-       "creationDate":"2023-10-10",
-       "status":"delivered",
-       "lastUpdate":"2023-10-15",
+       "creationDate":"2023-10-10T12:00:00",
+       "currentStatus":"delivered",
+       "updatedAt":"2023-10-15T12:00:00",
        "history":[
           {
              "status":"pending",
-             "date":"2023-10-10",
-             "time":"10:00"
+             "timestamp":"2023-10-10T10:00:00"
           },
           {
              "status":"transit",
-             "date":"2023-10-12",
-             "time":"14:30"
+             "timestamp":"2023-10-12T14:30:00"
           },
           {
              "status":"delivered",
-             "date":"2023-10-15",
-             "time":"09:15"
+             "timestamp":"2023-10-15T09:15:00"
           }
        ]
     },
     {
-       "id":"HGX-2023-002",
-       "number":"HGX-2023-002",
+       "id":2,
+       "trackingNumber":"HGX-2023-002",
        "origin":"Cali",
        "destination":"Barranquilla",
        "recipient":"Cliente Ejemplo 2",
-       "creationDate":"2023-10-09",
-       "status":"transit",
-       "lastUpdate":"2023-10-14",
+       "creationDate":"2023-10-09T12:00:00",
+       "currentStatus":"transit",
+       "updatedAt":"2023-10-14T12:00:00",
        "history":[
           {
              "status":"pending",
-             "date":"2023-10-09",
-             "time":"08:00"
+             "timestamp":"2023-10-09T08:00:00"
           },
           {
              "status":"transit",
-             "date":"2023-10-14",
-             "time":"11:45"
+             "timestamp":"2023-10-14T11:45:00"
           }
        ]
     },
     {
-       "id":"HGX-2023-003",
-       "number":"HGX-2023-003",
+       "id":3,
+       "trackingNumber":"HGX-2023-003",
        "origin":"Cartagena",
        "destination":"Bucaramanga",
        "recipient":"Cliente Ejemplo 3",
-       "creationDate":"2023-10-08",
-       "status":"pending",
-       "lastUpdate":"2023-10-13",
+       "creationDate":"2023-10-08T12:00:00",
+       "currentStatus":"pending",
+       "updatedAt":"2023-10-13T12:00:00",
        "history":[
           {
              "status":"pending",
-             "date":"2023-10-08",
-             "time":"16:20"
+             "timestamp":"2023-10-08T16:20:00"
           }
        ]
     },
     {
-       "id":"HGX-2023-004",
-       "number":"HGX-2023-004",
+       "id":4,
+       "trackingNumber":"HGX-2023-004",
        "origin":"Pereira",
        "destination":"Manizales",
        "recipient":"Cliente Ejemplo 4",
-       "creationDate":"2023-10-07",
-       "status":"transit",
-       "lastUpdate":"2023-10-12",
+       "creationDate":"2023-10-07T12:00:00",
+       "currentStatus":"transit",
+       "updatedAt":"2023-10-12T12:00:00",
        "history":[
           {
              "status":"pending",
-             "date":"2023-10-07",
-             "time":"09:30"
+             "timestamp":"2023-10-07T09:30:00"
           },
           {
              "status":"transit",
-             "date":"2023-10-12",
-             "time":"13:15"
+             "timestamp":"2023-10-12T13:15:00"
           }
        ]
     }

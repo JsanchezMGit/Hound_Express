@@ -4,11 +4,11 @@ import { describe, it, expect } from 'vitest';
 import { IGuide } from '../../types';
 
 const mockGuides: IGuide[] = [
-  { id: '1', status: 'pending', number: 'G-001', origin: 'CDMX', destination: 'Monterrey', recipient: 'Cliente A', creationDate: '2023-01-01', lastUpdate: '2023-01-01', history: [] },
-  { id: '2', status: 'transit', number: 'G-002', origin: 'Guadalajara', destination: 'Tijuana', recipient: 'Cliente B', creationDate: '2023-01-02', lastUpdate: '2023-01-03', history: [] },
-  { id: '3', status: 'transit', number: 'G-003', origin: 'Puebla', destination: 'Cancún', recipient: 'Cliente C', creationDate: '2023-01-03', lastUpdate: '2023-01-04', history: [] },
-  { id: '4', status: 'delivered', number: 'G-004', origin: 'Querétaro', destination: 'Mérida', recipient: 'Cliente D', creationDate: '2023-01-04', lastUpdate: '2023-01-05', history: [] },
-  { id: '5', status: 'delivered', number: 'G-005', origin: 'León', destination: 'Veracruz', recipient: 'Cliente E', creationDate: '2023-01-05', lastUpdate: '2023-01-06', history: [] }
+  { id: 1, currentStatus: 'pending', trackingNumber: 'G-001', origin: 'CDMX', destination: 'Monterrey', recipient: 'Cliente A', creationDate: '2023-01-01', updatedAt: '2023-01-01', history: [] },
+  { id: 2, currentStatus: 'transit', trackingNumber: 'G-002', origin: 'Guadalajara', destination: 'Tijuana', recipient: 'Cliente B', creationDate: '2023-01-02', updatedAt: '2023-01-03', history: [] },
+  { id: 3, currentStatus: 'transit', trackingNumber: 'G-003', origin: 'Puebla', destination: 'Cancún', recipient: 'Cliente C', creationDate: '2023-01-03', updatedAt: '2023-01-04', history: [] },
+  { id: 4, currentStatus: 'delivered', trackingNumber: 'G-004', origin: 'Querétaro', destination: 'Mérida', recipient: 'Cliente D', creationDate: '2023-01-04', updatedAt: '2023-01-05', history: [] },
+  { id: 5, currentStatus: 'delivered', trackingNumber: 'G-005', origin: 'León', destination: 'Veracruz', recipient: 'Cliente E', creationDate: '2023-01-05', updatedAt: '2023-01-06', history: [] }
 ];
 
 describe('StatusPanel Component', () => {
@@ -25,7 +25,7 @@ describe('StatusPanel Component', () => {
     });
 
     it('Debe mostrar los conteos correctos, sin importar que no todos los estatus se encuentren', () => {
-        const filteredGuides = mockGuides.filter(g => g.status !== 'delivered');
+        const filteredGuides = mockGuides.filter(g => g.currentStatus !== 'delivered');
         render(<StatusPanel guides={filteredGuides} />);
 
         expect(screen.getByText('3')).toBeInTheDocument();

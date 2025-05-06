@@ -1,89 +1,145 @@
-import { IAlert, IAppState, IGuide } from '../types';
-import guidesReducer, { addGuide, hideAlert, hideModal, setCurrentGuide, setSearchTerm, showAlert, showModal, updateGuideStatus } from './guidesSlice';
+import {   IAppState, IGuide, IDLE, LOADING, SUCCEEDED, 
+  FAILED, FETCH_GUIDES, UPDATE_GUIDE, CREATE_GUIDE, 
+  IAlert
+} from '../types';
+import guidesReducer, { addGuide, hideAlert, hideModal, 
+  setCurrentGuide, setSearchTerm, showAlert, showModal, 
+  updateGuide, fectchGuides } from './guidesSlice';
 import initialGuidesJSON from '../data/guides.json';
 
 const newGuide : IGuide = {
-    id: 'HGX-2025-001',
-    number: 'HGX-2025-001',
+    id: 1,
+    trackingNumber: 'HGX-2025-001',
     origin: 'Bogotá',
     destination: 'Medellín',
     recipient: 'Cliente Ejemplo 1',
-    creationDate: '2025-05-02',
-    status: 'pending',
-    lastUpdate: '2025-05-02',
-    history: [{ status:'pending', date:'2025-05-02', time:'18:40' }]
+    creationDate: '2025-05-02T:12:00:00',
+    currentStatus: 'pending',
+    updatedAt: '2025-05-02T:12:00:00',
+    history: [{ status:'pending', timestamp:'2025-05-02T:12:00:00' }]
 };
 
-let expectedInitialState: IAppState = {
-    guides: initialGuidesJSON as IGuide[],
-    searchTerm: '',
-    currentGuide: null,
-    alert: {
-        show: false,
-        message: '',
-        type: 'success'
-    },
-    modal: {
-        show: false,
-        title: ''
-    }
+const updatedGuide: IGuide = {
+  ...newGuide,
+  currentStatus: 'transit',
+  updatedAt: '2025-05-02T13:00:00',
+  history: [
+    ...newGuide.history,
+    { status: 'transit', timestamp: '2025-05-02T13:00:00' }
+  ]
+};
+
+const expectedInitialState: IAppState = {
+  guides: [],
+  searchTerm: '',
+  currentGuide: null,
+  alert: {
+    show: false,
+    message: '',
+    type: 'success'
+  },
+  modal: {
+    show: false,
+    title: ''
+  },
+  status: IDLE,
+  error: null
 };
 
 describe('Reductores de guidesSlice', () => {
-  it('Debe manejar cargar el estado inicial desde hound-express-app/src/data/guides.json', () => {
+  it('Debe manejar cargar el estado inicial', () => {
     const initialState = guidesReducer(undefined, { type: 'unknown' });
     expect(initialState).toEqual(expectedInitialState);
   });
 
-  it('Debe de agregar una guia', () => {
-    const state = guidesReducer(expectedInitialState, addGuide(newGuide));
-    expect(state.guides).toHaveLength(5);
-    expect(state.guides[4]).toEqual(newGuide);
-  });
-
-  const guideToTransit = 'HGX-2023-003';
-  it(`Debe actualizar el estatus a la guia ${guideToTransit} de pending a transit`, () => {
-    const updatedState = guidesReducer(expectedInitialState, updateGuideStatus(guideToTransit));
-    expect(updatedState.guides.find(g => g.id === guideToTransit)?.status).toBe('transit');
-  });
-
-  const guideToDelivered = 'HGX-2023-004';
-  it(`Debe actualizar el estatus a la guia ${guideToDelivered} de transit a delivered`, () => {
-    const updatedState = guidesReducer(expectedInitialState, updateGuideStatus(guideToDelivered));
-    expect(updatedState.guides.find(g => g.id === guideToDelivered)?.status).toBe('delivered');
+  it('Debe agregar manejar el estado fulfilled de addGuide', () => {
+    const action = { type: addGuide.fulfilled.type, payload: newGuide };
+    const state = guidesReducer(expectedInitialState, action);
+    
+    expect(state.status).toBe(SUCCEEDED);
+    expect(state.guides).toContainEqual(newGuide);
+    expect(state.alert).toEqual({
+      show: true,
+      message: `Guía ${newGuide.trackingNumber} registrada exitosamente`,
+      type: 'success'
+    });
   });
   
+  it('Debe manejar el estado rejected de addGuide', () => {
+    const errorMessage = 'Error al crear guía';
+    const action = { type: addGuide.rejected.type, payload: errorMessage };
+    const state = guidesReducer(expectedInitialState, action);
+    
+    expect(state.status).toBe(FAILED);
+    expect(state.error).toBe(errorMessage);
+    expect(state.alert).toEqual({
+      show: true,
+      message: 'Ocurrio un error al crear la guía',
+      type: 'error'
+    });
+  });
+
+  it('Debe manejar el estado fulfilled de updateGuide', () => {
+    const stateWithGuide = guidesReducer(
+      expectedInitialState, 
+      { type: addGuide.fulfilled.type, payload: newGuide }
+    );
+    
+    const action = { type: updateGuide.fulfilled.type, payload: updatedGuide };
+    const state = guidesReducer(stateWithGuide, action);
+    
+    expect(state.status).toBe(SUCCEEDED);
+    expect(state.guides.find(g => g.id === updatedGuide.id)?.currentStatus)
+      .toBe('transit');
+    expect(state.alert).toEqual({
+      show: true,
+      message: `Estado de la guia ${updatedGuide.trackingNumber} actualizado exitosamente`,
+      type: 'success'
+    });
+  });
+
+  it('Debe manejar el estado fulfilled de fectchGuides', () => {
+    const guides = [newGuide, updatedGuide];
+    const action = { type: fectchGuides.fulfilled.type, payload: guides };
+    const state = guidesReducer(expectedInitialState, action);
+    
+    expect(state.status).toBe(SUCCEEDED);
+    expect(state.guides).toEqual(guides);
+  });
+});
+
+describe('Acciones síncronas', () => {
   const searchTerm = '004';
-  it(`El parametro de busqueda debe ser el ingresado (${searchTerm})`, () => {
+  it(`Debe actualizar el término de búsqueda (${searchTerm})`, () => {
     const updatedState = guidesReducer(expectedInitialState, setSearchTerm(searchTerm));
     expect(updatedState.searchTerm).toBe(searchTerm);
   });
 
-  it('La guia actual debe ser la seleccionada', () => {
+  it('Debe establecer la guía actual', () => {
     const updatedState = guidesReducer(expectedInitialState, setCurrentGuide(newGuide));
     expect(updatedState.currentGuide).toBe(newGuide);
   });
 
-  it('Los valores del alerta deben ser los pasados', () => {
+  it('Debe mostrar la alerta con el mensaje correcto', () => {
     const alert : IAlert = { show: true, message: 'Mensaje de prueba', type: 'success' };
     const updatedState = guidesReducer(expectedInitialState, showAlert({ message: alert.message, type: alert.type }));
     expect(updatedState.alert).toStrictEqual(alert);
   });
 
-  it('El valor de show de la alerta debe ser falso', () => {
+  it('Debe ocultar la alerta', () => {
     const updatedState = guidesReducer(expectedInitialState, hideAlert());
     expect(updatedState.alert.show).toBe(false);
   });
 
   const modalTitle = 'Titulo de prueba';
-  it(`El valor del titulo del modal debe ser ${modalTitle} y el valor de show debe ser verdadero`, () => {
+  it(`Debe mostrar el modal con título ${modalTitle}`, () => {
     const updatedState = guidesReducer(expectedInitialState, showModal(modalTitle));
     expect(updatedState.modal.title).toBe(modalTitle);
     expect(updatedState.modal.show).toBe(true);
   });
 
-  it(`El valor show debe ser verdadero del modal debe ser falso`, () => {
+  it(`Debe ocultar el modal`, () => {
     const updatedState = guidesReducer(expectedInitialState, hideModal());
     expect(updatedState.modal.show).toBe(false);
-  });  
-})
+  });
+});

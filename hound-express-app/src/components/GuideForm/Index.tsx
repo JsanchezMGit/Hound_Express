@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IAlert, IGuide, StatusType } from '../../types';
+import { IAlert, IGuide } from '../../types';
 import './index.css';
 
 interface GuideFormProps {
@@ -10,12 +10,10 @@ interface GuideFormProps {
 
 const GuideForm = ({ guides, addGuide, setAlert }: GuideFormProps) => {
   const [formData, setFormData] = useState({
-    number: '',
+    trackingNumber: '',
     origin: '',
     destination: '',
-    recipient: '',
-    creationDate: '',
-    status: '' as StatusType | ''
+    recipient: ''
   });
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
@@ -38,13 +36,13 @@ const GuideForm = ({ guides, addGuide, setAlert }: GuideFormProps) => {
     const newErrors: Record<string, boolean> = {};
     let isValid = true;
 
-    // Validar campos vacíos y valida dupplicidad
-    ['number', 'origin', 'destination', 'recipient', 'creationDate', 'status'].forEach(field => {
+    // Validar campos vacíos y valida duplicidad por trackingNumber
+    ['trackingNumber', 'origin', 'destination', 'recipient'].forEach(field => {
       const fieldValue = formData[field as keyof typeof formData];
       if (!fieldValue) {
         newErrors[field] = true;
         isValid = false;
-      } else if(field === 'number' && guides.some(guide => guide.id === fieldValue.trim())) {
+      } else if(field === 'trackingNumber' && guides.some(guide => guide.trackingNumber === fieldValue.trim())) {
         newErrors[field] = true;
         isValid = false;
         setAlert({ show: true, message: `El numero de guia ${fieldValue} ya existe`, type: 'error' });
@@ -62,36 +60,23 @@ const GuideForm = ({ guides, addGuide, setAlert }: GuideFormProps) => {
       return;
     }
 
-    const currentDate = new Date().toISOString().split('T')[0];
-    const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
     const newGuide: IGuide = {
-      id: formData.number,
-      number: formData.number,
+      id: 0,
+      trackingNumber: formData.trackingNumber,
       origin: formData.origin,
       destination: formData.destination,
       recipient: formData.recipient,
-      creationDate: formData.creationDate,
-      status: formData.status as StatusType,
-      lastUpdate: currentDate,
-      history: [
-        { 
-          status: formData.status as StatusType, 
-          date: currentDate, 
-          time: currentTime 
-        }
-      ]
+      creationDate: '',
+      currentStatus: 'pending',
+      updatedAt: '',
+      history: []
     };
-
     addGuide(newGuide);
-    setAlert({ show: true, message: `Guía ${newGuide.number} registrada exitosamente`, type: 'success' });
     setFormData({
-      number: '',
+      trackingNumber: '',
       origin: '',
       destination: '',
-      recipient: '',
-      creationDate: '',
-      status: ''
+      recipient: ''
     });
   };
 
@@ -100,14 +85,14 @@ const GuideForm = ({ guides, addGuide, setAlert }: GuideFormProps) => {
       <h2 id="register-title"><i className="fas fa-edit"></i> Registro de Nueva Guía</h2>
       <form id="guide-form" className="form" onSubmit={handleSubmit}>
         <div className="form__group">
-          <label htmlFor="guide-number" className={errors.number ? 'invalid' : ''}>Número de Guía:</label>
+          <label htmlFor="guide-number" className={errors.trackingNumber ? 'invalid' : ''}>Número de Guía:</label>
           <input 
             type="text" 
             id="guide-number" 
-            name="number" 
-            value={formData.number}
+            name="trackingNumber" 
+            value={formData.trackingNumber}
             onChange={handleChange}
-            className={errors.number ? 'invalid' : ''}
+            className={errors.trackingNumber ? 'invalid' : ''}
             required
           />
         </div>
@@ -149,38 +134,7 @@ const GuideForm = ({ guides, addGuide, setAlert }: GuideFormProps) => {
             className={errors.recipient ? 'invalid' : ''}
             required
           />
-        </div>
-        
-        <div className="form__group">
-          <label htmlFor="creation-date" className={errors.creationDate ? 'invalid' : ''}>Fecha de Creación:</label>
-          <input 
-            type="date" 
-            id="creation-date" 
-            name="creationDate" 
-            value={formData.creationDate}
-            onChange={handleChange}
-            className={errors.creationDate ? 'invalid' : ''}
-            required
-          />
-        </div>
-        
-        <div className="form__group">
-          <label htmlFor="status" className={errors.status ? 'invalid' : ''}>Estado Inicial:</label>
-          <select 
-            id="status" 
-            name="status" 
-            value={formData.status}
-            onChange={handleChange}
-            className={errors.status ? 'invalid' : ''}
-            required
-          >
-            <option value="">Seleccione un estado</option>
-            <option value="pending">Pendiente</option>
-            <option value="transit">En tránsito</option>
-            <option value="delivered">Entregado</option>
-          </select>
-        </div>
-        
+        </div>       
         <button type="submit" className="form__submit" aria-label="Registrar guia" aria-controls="guide-form" role="button">Registrar Guía</button>
       </form>
     </section>

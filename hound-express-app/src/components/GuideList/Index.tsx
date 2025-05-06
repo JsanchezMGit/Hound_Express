@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { IGuide, statusClasses, statusLabels } from '../../types';
 import './index.css';
+import { formatDate, getNextGuideStatus } from '../../utils';
 
 interface GuideListProps {
   guides: IGuide[];
   onSearch: (term: string) => void;
-  onUpdateStatus: (id: string) => void;
+  onUpdate: (guide: IGuide) => void;
   onShowHistory: (guide: IGuide) => void;
 }
 
-const GuideList = ({ guides, onSearch, onUpdateStatus, onShowHistory }: GuideListProps) => {
+const GuideList = ({ guides, onSearch, onUpdate, onShowHistory }: GuideListProps) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,10 +19,12 @@ const GuideList = ({ guides, onSearch, onUpdateStatus, onShowHistory }: GuideLis
     onSearch(term);
   };
 
-  const formatDate = (dateString: string): string => {
-    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    return new Date(dateString).toLocaleDateString('es-ES', options);
-  };
+  const handleUpdateButton = (guide: IGuide) => {
+    const guideUpdate = {...guide};
+    const newStatus = getNextGuideStatus(guideUpdate.currentStatus) ?? guideUpdate.currentStatus;
+    guideUpdate.currentStatus = newStatus;
+    onUpdate(guideUpdate);
+  }
 
   return (
     <section className="guide__list" id="lista" aria-labelledby="guides-title">
@@ -57,21 +60,21 @@ const GuideList = ({ guides, onSearch, onUpdateStatus, onShowHistory }: GuideLis
             ) : (
               guides.map(guide => (
                 <tr key={guide.id}>
-                  <td data-label="Número">{guide.number}</td>
+                  <td data-label="Número">{guide.trackingNumber}</td>
                   <td data-label="Estado">
-                    <span className={`status-badge ${statusClasses[guide.status]}`}>
-                      {statusLabels[guide.status]}
+                    <span className={`status-badge ${statusClasses[guide.currentStatus]}`}>
+                      {statusLabels[guide.currentStatus]}
                     </span>
                   </td>
                   <td data-label="Origen">{guide.origin}</td>
                   <td data-label="Destino">{guide.destination}</td>
-                  <td data-label="Actualización">{formatDate(guide.lastUpdate)}</td>
+                  <td data-label="Actualización">{formatDate(guide.updatedAt)}</td>
                   <td>
                     <div className="action-buttons">
                       <button 
-                        disabled={guide.status === 'delivered'}
+                        disabled={guide.currentStatus === 'delivered'}
                         className="action-btn action-btn--update" 
-                        onClick={() => onUpdateStatus(guide.id)}
+                        onClick={() => handleUpdateButton(guide)}
                         aria-label="Actualizar estatus"
                       >
                         <i className="fas fa-sync-alt"></i>

@@ -7,9 +7,9 @@ interface StatusPanelProps {
 
 const StatusPanel = ({ guides }: StatusPanelProps) => {
   const activeCount = guides.length;
-  const processCount = guides.filter(g => g.status === 'pending').length;
-  const transitCount = guides.filter(g => g.status === 'transit').length;
-  const deliveredCount = guides.filter(g => g.status === 'delivered').length;
+  const processCount = guides.filter(g => g.currentStatus === 'pending').length;
+  const transitCount = guides.filter(g => g.currentStatus === 'transit').length;
+  const deliveredCount = guides.filter(g => g.currentStatus === 'delivered').length;
 
   return (
     <section className="status__panel" id="estado" aria-label="Panel de estado del sistema" aria-labelledby="estatus-title">

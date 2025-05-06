@@ -9,6 +9,7 @@ import Alert from './components/Alert/index';
 import Modal from './components/Modal/Index';
 import { IAlert } from './types';
 import GuideHistory from './components/GuideHistory/Index';
+import { useEffect, useRef } from 'react';
 
 function App() {
   const {
@@ -20,8 +21,18 @@ function App() {
     showGuideHistory,
     hideModal,
     showAlert,
-    hideAlert
+    hideAlert,
+    fetchGuides
   } = useGuides();
+
+  const initialRender = useRef(true);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+      fetchGuides()
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -34,7 +45,7 @@ function App() {
         <GuideList 
           guides={filteredGuides} 
           onSearch={setSearchTerm} 
-          onUpdateStatus={updateGuideStatus} 
+          onUpdate={updateGuideStatus} 
           onShowHistory={showGuideHistory} 
         />
       </main>

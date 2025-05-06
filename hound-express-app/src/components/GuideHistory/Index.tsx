@@ -1,5 +1,5 @@
 import { IGuide, statusClasses, statusLabels } from '../../types';
-import { formatDate } from '../../utils';
+import { getDateTime } from '../../utils';
 import './index.css';
 
 interface GuideHistoryProps {
@@ -31,8 +31,8 @@ const GuideHistory = ({ guide }: GuideHistoryProps) => {
                           {statusLabels[entry.status]}
                         </span>
                       </td>
-                      <td data-label="Fecha">{formatDate(`${entry.date}T${entry.time}`)}</td>
-                      <td data-label="Hora">{entry.time}</td>
+                      <td data-label="Fecha">{getDateTime(entry.timestamp).date}</td>
+                      <td data-label="Hora">{getDateTime(entry.timestamp).time}</td>
                     </tr>
                   ))}
                 </tbody>
