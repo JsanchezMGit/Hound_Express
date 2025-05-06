@@ -1,11 +1,7 @@
-import {   IAppState, IGuide, IDLE, LOADING, SUCCEEDED, 
-  FAILED, FETCH_GUIDES, UPDATE_GUIDE, CREATE_GUIDE, 
-  IAlert
-} from '../types';
+import {   IAppState, IGuide, IDLE, SUCCEEDED, FAILED, IAlert } from '../types';
 import guidesReducer, { addGuide, hideAlert, hideModal, 
   setCurrentGuide, setSearchTerm, showAlert, showModal, 
   updateGuide, fectchGuides } from './guidesSlice';
-import initialGuidesJSON from '../data/guides.json';
 
 const newGuide : IGuide = {
     id: 1,
